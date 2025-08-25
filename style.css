@@ -1,0 +1,65 @@
+body {
+  margin-top: 10vh;
+  display: flex;
+  justify-content: center;
+}
+#calculette {
+  display: grid;
+  border: 1px solid black;
+  height: 550px;
+  width: 300px;
+  grid-template-columns: 80% 20%;
+  grid-template-rows: 20% 80%;
+  grid-template-areas:
+    "aff his"
+    "cla his";
+}
+#historique {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  grid-area: his;
+}
+#affichage {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  grid-area: aff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+#saisi {
+  height: 65%;
+  width: 100%;
+  border: 1px solid black;
+}
+#resultat {
+  width: 100%;
+  height: 35%;
+  border: 1px solid black;
+}
+#clavier {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  display: grid;
+  grid-template-rows: 20% 80%;
+}
+#specifique {
+  border: 1px solid black;
+}
+#base {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+  align-items: center;
+  justify-items: center;
+}
+button {
+  border: 1px solid black;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: none;
+}
