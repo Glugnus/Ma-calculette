@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,35 +15,37 @@
       </div>
       <div id="clavier">
         <div id="specifique">
-          <button class="bouton special">Racine</button>
-          <button class="Spe">Pi</button>
-          <button class="Spe">^</button>
-          <button class="Spe">!</button>
+          <button class="bouton">Racine</button>
+          <button class="bouton">Pi</button>
+          <button class="bouton">^</button>
+          <button class="bouton">!</button>
         </div>
         <div id="base">
-          <button id="clear">AC</button>
-          <button class="Operateur">()</button>
-          <button class="Operateur">%</button>
-          <button class="Operateur">/</button>
-          <button class="chiffre">7</button>
-          <button class="chiffre">8</button>
-          <button class="chiffre">9</button>
-          <button class="Operateur">*</button>
-          <button class="chiffre">4</button>
-          <button class="chiffre">5</button>
-          <button class="chiffre">6</button>
-          <button class="Operateur">-</button>
-          <button class="chiffre">1</button>
-          <button class="chiffre">2</button>
-          <button class="chiffre">3</button>
-          <button class="Operateur">+</button>
-          <button class="chiffre">0</button>
-          <button class="chiffre">,</button>
-          <button id="retour"><-</button>
-          <button id="egal">=</button>
+          <button id="clear" class="bouton">AC</button>
+          <button id="parenthese" class="bouton operateur" data-ope="()">
+            ()
+          </button>
+          <button class="bouton operateur" data-ope="%">%</button>
+          <button class="bouton operateur" data-ope="/">/</button>
+          <button class="bouton chiffre" data-ope="7">7</button>
+          <button class="bouton chiffre" data-ope="8">8</button>
+          <button class="bouton chiffre" data-ope="9">9</button>
+          <button class="bouton operateur" data-ope="*">x</button>
+          <button class="bouton chiffre" data-ope="4">4</button>
+          <button class="bouton chiffre" data-ope="5">5</button>
+          <button class="bouton chiffre" data-ope="6">6</button>
+          <button class="bouton operateur" data-ope="-">-</button>
+          <button class="bouton chiffre" data-ope="1">1</button>
+          <button class="bouton chiffre" data-ope="2">2</button>
+          <button class="bouton chiffre" data-ope="3">3</button>
+          <button class="bouton operateur" data-ope="+">+</button>
+          <button class="bouton chiffre" data-ope="0">0</button>
+          <button id="virgule" class="bouton chiffre" data-ope=".">,</button>
+          <button id="effacer" class="bouton"><-</button>
+          <button id="egal" class="bouton" data-ope="=">=</button>
         </div>
       </div>
     </section>
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
   </body>
 </html>
