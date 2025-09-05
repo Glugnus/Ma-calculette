@@ -1,10 +1,23 @@
+@font-face {
+  font-family: "teko-Medium";
+  src: url(./src/Teko/static/Teko-Regular.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "teko-Light";
+  src: url(./src/Teko/static/Teko-Light.ttf);
+  font-weight: 200;
+  font-style: normal;
+}
+
 * {
-  border: 1px solid black;
   margin: 0;
   padding: 0;
 }
 
 body {
+  font-family: "teko-Medium", sans-serif;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -13,14 +26,16 @@ body {
 }
 
 #calculette {
+  border: 3px solid black;
   height: 600px;
-  width: 350px;
+  width: 300px;
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 30% 70%;
+  grid-template-rows: 40% 60%;
   grid-template-areas:
-    "aff his"
-    "cla his";
+    "aff"
+    "cla";
+  border-radius: 40px;
 }
 
 #historique {
@@ -32,25 +47,66 @@ body {
   display: flex;
   grid-area: aff;
   flex-direction: column;
+  padding-right: 3%;
+  gap: 10px;
+  justify-content: flex-end;
 }
 
 #clavier {
   display: flex;
   grid-area: cla;
   flex-direction: column;
+  justify-content: flex-start;
+  height: 360px;
+}
+
+#resultat-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 60px;
+  padding-left: 5%;
+}
+
+#saisi,
+#resultat {
+  text-align: right;
+  line-height: 1;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: 0;
 }
 
 #saisi {
-  height: 70%;
-  width: 100%;
-  text-align: end;
-  padding-top: 20%;
+  min-width: 80%;
+  min-height: 70px;
+  font-size: 4rem;
+  font-family: "teko-Medium", monospace;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 #resultat {
-  height: 30%;
-  width: 100%;
-  text-align: end;
-  padding-top: 2%;
+  font-family: "teko-Light";
+  font-size: 3rem;
+  color: rgb(75, 74, 74);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.result {
+  color: rgb(75, 74, 74);
+}
+
+.erreur {
+  color: red;
+  font-style: italic;
 }
 
 #base {
@@ -61,18 +117,52 @@ body {
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   justify-items: center;
   align-items: center;
+  padding-bottom: 2%;
 }
 #specifique {
   width: 100%;
-  display: none;
+  height: 40%;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   justify-items: center;
   align-items: center;
 }
 
+.desactive {
+  display: none;
+}
+.active {
+  display: grid;
+}
+
 .bouton {
-  background: none;
-  border-radius: 50%;
-  height: 60px;
-  width: 60px;
+  font-family: "teko-Medium";
+  font-size: 2rem;
+  line-height: 1;
+  border: 0;
+  background: #e7e8ec;
+  border-radius: 68px;
+  height: 68px;
+  width: 68px;
+  display: grid;
+  place-items: center;
+}
+
+.expand {
+  background: #e7e8ec;
+  border-radius: 45px;
+  height: 45px;
+  width: 70px;
+}
+
+.operateur {
+  background: #dfe0eb;
+}
+
+#clear {
+  background: #dfe2f3;
+}
+#egal {
+  background: #7e86aa;
+  color: white;
 }
