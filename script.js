@@ -696,6 +696,7 @@ function afficherHistory() {
   historique.classList.toggle("is-hidden");
   toggleHist = !toggleHist;
   calculette.dataset.history = toggleHist ? "open" : "close";
+  historique.scrollTop = historique.scrollHeight;
 }
 
 function afficherMenu() {
