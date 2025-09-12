@@ -1,5 +1,6 @@
+/* 1) Fonts */
 @font-face {
-  font-family: "teko-Medium";
+  font-family: "teko-Regular";
   src: url(./src/Teko/static/Teko-Regular.ttf);
   font-weight: 400;
   font-style: normal;
@@ -11,67 +12,273 @@
   font-style: normal;
 }
 
+/* 2) Tokens (variables) */
+:root {
+  /* Tailles calculette*/
+  --h-calc: 600px;
+  --h-aff: 240px;
+  --h-cla: 360px;
+  --h-base: 100%;
+
+  /* Tailles spec active */
+  --h-spec: 30%;
+  --spec-base: 70%;
+
+  /* Tailles history active */
+  --h-history: 70px;
+  --hist-cla: 290px;
+
+  /* Animations */
+  --t-fast: 220ms;
+  --t-med: 260ms;
+  --easing: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Couleurs */
+  --bg-app: white;
+  --bg: #e7e8ec;
+  --bg-ope: #dfe0eb;
+  --bg-clear: #dfe2f3;
+  --bg-egal: #7e86aa;
+  --bg-btnLine: white;
+  --bg-modal: #e7e8ec;
+  --text-dim: #858080;
+  --text-base: black;
+  --svg-color: black;
+  --text-egal: white;
+  --text-bouton: black;
+  --text-ope: rgb(77, 77, 77);
+  --text-clear: black;
+  --overlay-dark: rgba(75, 74, 74, 0.13);
+}
+
+body[data-theme="dark"] {
+  --bg-app: black;
+  --bg-btnLine: black;
+  --bg: rgb(48, 48, 48);
+  --bg-ope: rgb(72, 81, 100);
+  --bg-clear: rgb(94, 108, 134);
+  --bg-modal: #202020;
+  --bg-egal: rgb(183, 201, 235);
+  --text-dim: white;
+  --text-base: white;
+  --svg-color: rgb(150, 150, 150);
+  --text-egal: rgb(28, 45, 78);
+  --text-bouton: rgb(203, 207, 214);
+  --text-ope: rgb(162, 180, 211);
+  --text-clear: rgb(163, 190, 238);
+  --overlay-dark: rgba(90, 90, 90, 0.623);
+}
+
+body[data-theme="dark"] .calculette[data-history="open"] {
+  --bg-btnLine: var(--bg);
+}
+
+/* 3) Base / Reset */
+
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
-
+html,
 body {
-  font-family: "teko-Medium", sans-serif;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+}
+body {
+  font-family: "teko-Regular";
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--bg-app);
 }
 
-#calculette {
-  border: 3px solid black;
-  height: 600px;
+/* 4) Layout (Grandes zones) */
+.calculette {
+  background: var(--bg-app);
+  height: var(--h-calc);
   width: 300px;
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 40% 60%;
-  grid-template-areas:
-    "aff"
-    "cla";
+  border: 3px solid var(--text-base);
   border-radius: 40px;
-}
-
-#historique {
-  grid-area: his;
-  display: none;
-}
-
-#affichage {
   display: flex;
-  grid-area: aff;
   flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.aff {
+  height: var(--h-aff);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   padding-right: 3%;
-  gap: 10px;
+  padding-left: 3%;
+}
+
+.cla {
+  height: var(--h-cla);
+  display: flex;
+  flex-direction: column;
   justify-content: flex-end;
 }
 
-#clavier {
+/* 5) Components (pièces stables) */
+
+/* Affichage */
+.btnLine {
+  background-color: var(--bg-btnLine);
+  height: 35px;
   display: flex;
-  grid-area: cla;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: 360px;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  position: relative;
 }
 
-#resultat-wrapper {
+.hist {
+  min-height: var(--h-history);
+  max-height: var(--h-history);
+  height: auto;
   display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  background-color: var(--bg);
+  flex-direction: column;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.hist-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  line-height: 1;
+}
+
+.ope {
+  font-family: "teko-Regular";
+  font-size: 1.5rem;
+  color: var(--svg-color);
+}
+.res {
+  font-family: "teko-Light";
+  font-size: 1.5rem;
+  color: var(--text-ope);
+}
+
+.saisi {
+  height: 133px;
+  font-size: 4rem;
+  font-family: "teko-Regular";
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  color: var(--text-bouton);
+}
+
+.displayResult {
+  height: 72px;
+  font-family: "teko-Light";
+  font-size: 3rem;
+  color: var(--text-ope);
+  display: flex;
+  align-items: flex-end;
   justify-content: space-between;
-  align-items: center;
-  min-height: 60px;
-  padding-left: 5%;
 }
 
 #saisi,
 #resultat {
-  text-align: right;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: var(--h-calc);
+  background: rgba(255, 255, 255, 0);
+  z-index: 10;
+  transform: translateX(-10px);
+}
+
+.menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 200px;
+  background-color: var(--bg-modal);
+  border-radius: 15px;
+  padding-left: 15px;
+  box-shadow: 0 0 3px 0px #00000061;
+  z-index: 20;
+}
+
+/* Clavier */
+
+.base {
+  height: var(--h-base);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  padding-bottom: 5px;
+}
+
+.specifique {
+  height: var(--h-spec);
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+  display: grid;
+}
+
+/* Boutons & icones */
+
+.bouton {
+  font-family: "teko-Regular";
+  font-size: 1.7rem;
   line-height: 1;
+  border: 0;
+  background: var(--bg);
+  border-radius: 50%;
+  height: 90%;
+  width: 90%;
+  display: grid;
+  place-items: center;
+  color: var(--text-bouton);
+}
+
+.menu-button {
+  background: none;
+  border: 0;
+  line-height: 3;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  color: var(--text-bouton);
+}
+
+.menu-button svg {
+  margin-right: 15px;
+}
+
+.operateur {
+  background: var(--bg-ope);
+  color: var(--text-ope);
+}
+#clear {
+  background: var(--bg-clear);
+  color: var(--text-clear);
+}
+#egal {
+  background: var(--bg-egal);
+  color: var(--text-egal);
 }
 
 .icon {
@@ -81,27 +288,69 @@ body {
   background: none;
   border: 0;
 }
-
-#saisi {
-  min-width: 80%;
-  min-height: 70px;
-  font-size: 4rem;
-  font-family: "teko-Medium", monospace;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-#resultat {
-  font-family: "teko-Light";
-  font-size: 3rem;
-  color: rgb(75, 74, 74);
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
+.icon svg {
+  display: block;
+  fill: var(--svg-color);
 }
 
-.result {
-  color: rgb(75, 74, 74);
+.resultActif {
+  color: var(--text-ope);
+}
+
+.modal {
+  position: fixed;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--bg-modal);
+  width: 250px;
+  border-radius: 20px;
+  box-shadow: 0 0 4px 0 #00000059;
+  padding: 10px;
+  z-index: 30;
+}
+
+.modal-content {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-size: 0.5rem;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-areas:
+    "h2 h2"
+    "b1 b2";
+  justify-items: end;
+}
+.modal-content h2 {
+  padding-bottom: 20px;
+  text-align: start;
+  justify-self: start;
+  grid-area: h2;
+  color: var(--text-bouton);
+}
+
+.dark {
+  background-color: var(--overlay-dark);
+}
+
+/* 6) states (états UI, pas d'anim) */
+
+.is-hidden {
+  display: none;
+}
+
+.calculette[data-spec="open"] {
+  --h-base: 70%;
+}
+
+.calculette[data-history="open"] {
+  --h-cla: 290px;
+  --h-aff: 310px;
+  --bg-btnLine: var(--bg);
+}
+
+.bouton.spec-actif {
+  border-radius: 25px;
 }
 
 .erreur {
@@ -109,60 +358,14 @@ body {
   font-style: italic;
 }
 
-#base {
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  justify-items: center;
-  align-items: center;
-  padding-bottom: 2%;
+.hist::-webkit-scrollbar {
+  width: 8px;
+  background: transparent; /* la rendre invisible */
 }
-#specifique {
-  width: 100%;
-  height: 40%;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  justify-items: center;
-  align-items: center;
+.hist:hover::-webkit-scrollbar {
+  width: 8px; /* largeur visible */
 }
-
-.desactive {
-  display: none;
-}
-.active {
-  display: grid;
-}
-
-.bouton {
-  font-family: "teko-Medium";
-  font-size: 2rem;
-  line-height: 1;
-  border: 0;
-  background: #e7e8ec;
-  border-radius: 68px;
-  height: 68px;
-  width: 68px;
-  display: grid;
-  place-items: center;
-}
-
-.expand {
-  background: #e7e8ec;
-  border-radius: 45px;
-  height: 45px;
-  width: 70px;
-}
-
-.operateur {
-  background: #dfe0eb;
-}
-
-#clear {
-  background: #dfe2f3;
-}
-#egal {
-  background: #7e86aa;
-  color: white;
+.hist:hover::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
 }
