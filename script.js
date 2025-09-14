@@ -111,13 +111,25 @@ calculette.addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
 
-  if (btn === expandButton) afficherOpeSpe();
-  if (btn === historyButton) afficherHistory();
-  if (btn === parameterButton) afficherMenu();
+  if (btn === expandButton) {
+    afficherOpeSpe();
+    flash(btn);
+  }
+  if (btn === historyButton) {
+    afficherHistory();
+    flash(btn);
+  }
+  if (btn === parameterButton) {
+    afficherMenu();
+    flash(btn);
+  }
   if (btn === effacerHistoriqueButton) effacerHistorique();
   if (btn === themeButton) changeTheme();
 
   const clickValue = btn.dataset.ope;
+
+  rippleEffect(btn);
+
   if (btn.classList.contains("chiffre") && btn !== virguleButton)
     inputNumber(clickValue);
   if (btn === virguleButton) inputDot(clickValue);
@@ -151,9 +163,6 @@ calculette.addEventListener("click", (e) => {
   syncScanOpe();
   directResult();
 
-  console.log(state);
-  console.log(hist);
-
   affichageSaisi.textContent = state.screenOpe;
 });
 
@@ -173,6 +182,20 @@ fermerButton.addEventListener("click", () => {
 eraseButton.addEventListener("click", () => {
   confirmerSuppr();
 });
+
+function flash(btn) {
+  btn.classList.add("flash");
+  setTimeout(() => {
+    btn.classList.remove("flash");
+  }, 500);
+}
+
+function rippleEffect(btn) {
+  btn.classList.remove("ripple");
+  void btn.offsetWidth;
+  btn.classList.add("ripple");
+  setTimeout(() => btn.classList.remove("ripple"), 180);
+}
 
 function factorielle(n) {
   if (n < 0) return "";
