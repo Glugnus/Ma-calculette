@@ -526,13 +526,13 @@ function calcul() {
       affichageSaisi.textContent = state.calcOpe;
       affichageResult.textContent = "";
       hist.push({ ope: state.screenOpe, res: state.result });
+      const line = document.createElement("div");
       hist.forEach((entry) => {
-        const line = document.createElement("div");
         line.classList.add("hist-entry");
         line.innerHTML = `<span class="ope">${entry.ope} = </span><span class="res">${entry.res}</span`;
-        historique.appendChild(line);
-        historique.scrollTop = historique.scrollHeight;
       });
+      historique.appendChild(line);
+      historique.scrollTop = historique.scrollHeight;
       state.screenOpe = String(state.result);
       state.calcOpe = String(state.result);
       state.lastItem = "result";
